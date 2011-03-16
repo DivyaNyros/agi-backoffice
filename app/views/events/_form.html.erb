@@ -1,0 +1,126 @@
+<% content_for :script do -%>
+  $(document).ready(function(){
+    $(".datepicker").datepicker({ maxDate: '+1y', minDate: '-1m' });
+  });
+<% end -%>
+
+<% form_for @event, :html => { :class => 'form' } do |f| -%>
+  <%= error_messages_for :event %>
+  
+  <div class="right-col">
+    <h3>Event Details</h3>
+    
+    <fieldset class="last">
+      <%= f.label :description, "Description" %>
+      <br/>
+      <%= f.text_area :description, :size => '30x10' %>
+      <br/>
+      <%= f.label :instructions, "Instructions" %>
+      <br/>
+      <%= f.text_area :instructions, :size => '30x10' %>      
+    </fieldset>
+  </div>
+  
+  <div class="left-col">
+    <!-- <h3>Event Information</h3> -->
+    <fieldset>
+      <%= f.label :name, "Event Name" %>
+      <br/>
+      <span style="margin-left: 2.0em;"><%= f.text_field :name, :class => 'text' %></span>
+      <br/>
+      <%= f.label :type_id, "Type" %>
+      <br/>
+      <span style="margin-left: 2.0em;"><%= f.collection_select :type_id, EventType.find(:all, :order => "name"), :id, :name, { :prompt => "-- Select a type --" } %></span>
+      <br/>
+      <table class="date-time-table">
+        <tr>
+          <td><%= f.label :start_date, "Start Date" %></td>
+          <td><%= f.text_field :start_date, :class => 'datepicker' %></td>
+          <td><%= f.label :start_time, "Start Time" %></td>
+          <td><%= f.text_field :start_time, :class => 'text', :style => 'width: 120px;' %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :end_date, "End Date" %></td>
+          <td><%= f.text_field :end_date, :class => 'datepicker' %></td>
+          <td><%= f.label :end_time, "End Time" %></td>
+          <td><%= f.text_field :end_time, :class => 'text', :style => 'width: 120px;' %></td>
+        </tr>
+      </table>
+    </fieldset>
+    
+    <fieldset>
+      <%= f.label :location, "Location/Venue" %>
+      <br/>
+      <span style="margin-left: 2.0em;"><%= f.text_field :location, :class => 'text' %></span>
+      <br/>
+      <% f.fields_for :addresses do |addresses| -%>
+        <label>Address</label>
+        <br/>
+        <span style="margin-left: 2.0em;">
+          <%= addresses.text_field :street, :class => 'text' %>
+          <%= addresses.text_field :unit, :class => 'text', :style => "width: 70px;" %>
+        </span>
+        <br/>
+        <span style="margin-left: 2.0em;">
+          <%= addresses.text_field :city, :class => 'text', :style => "width: 240px;" %>
+        </span>
+        <br/>
+        
+		 <span style="margin-left: 2.0em;">
+<%= addresses.country_select :country_id, Carmen.default_country = 'CA', {}, {:onChange => remote_function( :url => change_state_option_events_path, :update => "state_id", :with => "'country=' +value+'&object='+this.form.object")} %>
+		
+        </span>
+        <br/>
+
+        <span style="margin-left: 2.0em;" id="state_id">
+          <%= addresses.state_select :state, 'CA', {}, :class => 'text', :style => "width: 240px;" %>
+        </span>
+        <br/>
+        <span style="margin-left: 2.0em;">
+          <%= addresses.text_field :zip, :class => 'text', :style => "width: 75px;" %>
+        </span>
+      <% end -%>
+    </fieldset>
+    
+    <fieldset>
+      <% f.fields_for :phone_numbers do |phone_numbers| -%>
+        <%= phone_numbers.label :data, "Phone Number" %>
+        <br/>        
+        <span style="margin-left: 2.0em;">
+          <%= phone_numbers.text_field :data, :class => 'text' %> <%= phone_numbers.select :category, PhoneNumber.categories %>
+        </span>
+      <% end -%>
+    </fieldset>
+    
+    <fieldset class="last">
+      <% f.fields_for :websites do |websites| -%>
+        <%= websites.label :data, "Website" %>
+        <br/>        
+        <span style="margin-left: 2.0em;">
+          <%= websites.text_field :data, :class => 'text' %> <%= websites.select :category, Website.categories %>
+        </span>
+      <% end -%>
+    </fieldset>
+    <fieldset class="last">
+        <label>iContact list group</label>
+        <br/>
+        <span style="margin-left: 2.0em;">
+          <%
+            options = List.group_names
+            options.insert(0, ["--Select group--", ""])
+
+            unless @event.nil?
+              selected = @event.icontact_group
+            else
+              selected = ""
+            end
+          %>
+          <%= select_tag "event[icontact_group]", options_for_select(options, selected), {:style => "width: 210px;"} %>
+        </span>
+    </fieldset>
+  </div>
+  
+  <div class="clear" style="height: 10px;"><hr/></div>
+  
+  <%= f.submit "Save", :class => 'submit' %> or <%= link_to 'Cancel', objects_path %>
+<% end -%>

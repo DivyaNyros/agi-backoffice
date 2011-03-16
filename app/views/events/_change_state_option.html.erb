@@ -1,0 +1,15 @@
+
+<% if @message.blank?  %>
+<%# form_for :addresses, :html => { :class => 'form' } do |addresses| -%>
+<span  id="state_id">
+ <%#= @form.state_select :state, "#{@country_id}", {}, :class => 'text', :style => "width: 240px;" %>
+ <%= select_tag("event[addresses_attributes][0][state]",state_options_for_select(nil,"#{@country_id}"), {:style => 'width:240px;'})  %>
+
+  </span>  
+  <br/> 
+<%# end %>
+<% else %>
+<span><select disabled="disabled" style=" width:240px;"><option>Select State</option></select></span>
+<%#=  @message %>
+<% end %>
+

@@ -1,0 +1,20 @@
+# Environment settings.
+development:
+  bucket: agi-backoffice
+  url:    storage.enspiredsoftware.com
+  backup: agi-backoffice
+
+production:
+  bucket: agi-backoffice
+  url:    storage.enspiredsoftware.com
+  backup: agi-backoffice
+
+staging:
+  bucket: agi-backoffice
+  url:    storage.enspiredsoftware.com
+  backup: agi-backoffice
+
+# Other settings
+access_key_id: 1GZERYSFN2VPTT3J8582
+secret_access_key: +gMZ8N7S3cB4ea9Xog1ckU7++mPQ3Axj6+RniKeY
+obsoleted_days: 15

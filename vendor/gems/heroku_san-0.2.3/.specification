@@ -1,0 +1,85 @@
+--- !ruby/object:Gem::Specification 
+name: heroku_san
+version: !ruby/object:Gem::Version 
+  hash: 17
+  prerelease: false
+  segments: 
+  - 0
+  - 2
+  - 3
+  version: 0.2.3
+platform: ruby
+authors: 
+- Elijah Miller
+- Glenn Roberts
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2010-08-30 00:00:00 -04:00
+default_executable: 
+dependencies: []
+
+description: Manage multiple Heroku instances/apps for a single Rails app using Rake
+email: glenn.roberts@siyelo.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- LICENSE
+- README.rdoc
+- TODO
+files: 
+- .gitignore
+- CHANGELOG
+- LICENSE
+- README.rdoc
+- Rakefile
+- TODO
+- VERSION
+- heroku_san.gemspec
+- init.rb
+- install.rb
+- lib/heroku_san.rb
+- lib/heroku_san/tasks.rb
+- lib/tasks/heroku.rake
+- lib/templates/heroku.example.yml
+- rails/init.rb
+- uninstall.rb
+has_rdoc: true
+homepage: http://github.com/glennr/heroku_san
+licenses: []
+
+post_install_message: 
+rdoc_options: 
+- --charset=UTF-8
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.7
+signing_key: 
+specification_version: 3
+summary: A bunch of useful Rake tasks for managing your Heroku apps
+test_files: []
+

@@ -1,0 +1,25 @@
+<% form_for @event_type, :html => { :class => 'form' } do |f| -%>
+  <%= error_messages_for :event_type %>
+  
+  <div class="left-col">
+    <h3>Event Type Details</h3>
+    
+    <fieldset class="last">
+      <%= f.label :name %>
+      <br/>
+      <%= f.text_field :name %>
+      <br/>
+      <%= f.label :description %>
+      <br/>
+      <%= f.text_area :description, :size => '30x10' %>
+      <br />
+      <%= f.label "Notify to" %>
+      <br/>
+      <%= f.text_field :email %>
+    </fieldset>
+  </div>
+  
+  <div class="clear" style="height: 10px;"><hr/></div>
+  
+  <%= f.submit "Save", :class => 'submit' %> or <%= link_to 'Cancel', objects_path %>
+<% end -%>

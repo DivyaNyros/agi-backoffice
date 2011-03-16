@@ -1,0 +1,3 @@
+apps:
+  production: agi-backoffice
+  staging: agi-backoffice-staging
